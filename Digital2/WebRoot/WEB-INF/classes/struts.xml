@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.custom.i18n.resources" value="regResource"></constant>
+	<constant name="struts.i18n.encoding" value="utf-8"></constant>
+	<package name = "Digital2" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="myAuthorization" class="com.Digital2.intercepter.AuthorizationIntercepter"></interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="myAuthorization"></interceptor-ref>
+			</interceptor-stack>		
+		</interceptors>
+		<global-results>
+			<result name = "input" type = "dispatcher">/login.jsp</result>
+		</global-results>
+		
+		<action name="login" class="com.Digital2.action.LoginAction" method = "execute">
+			<result name = "success" type = "redirect">/index.jsp</result>
+			<result name = "input" type = "dispatcher">/login.jsp</result>
+		</action>
+		<action name="logout" class="com.Digital2.action.LogoutAction" method = "execute">
+			<result name = "success" type = "redirect">/index.jsp</result>
+		</action>
+		<action name="register" class="com.Digital2.action.RegisterAction" method = "execute">
+			<result name = "success">/login.jsp</result>
+			<result name = "input">/signup.jsp</result>
+		</action>
+		<action name="list" class="com.Digital2.action.ProductInfoAction" method = "list">
+			<result name = "index">/index.jsp</result>
+			<interceptor-ref name="myStack"></interceptor-ref>
+			<result name = "input">/login.jsp</result>
+		</action>
+		<action name="getime" class="com.Digital2.action.GetimeAction" method = "execute">
+			<result name = "success" type = "dispatcher">/time.jsp</result>
+		</action>
+	</package>
+</struts>
+	

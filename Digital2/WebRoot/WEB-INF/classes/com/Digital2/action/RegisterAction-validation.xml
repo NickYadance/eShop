@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC	
+"-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+ <validators>
+ 	<field name="user.usernameString">
+ 		<field-validator type="stringlength">
+ 			<param name="maxLength">10</param>
+ 			<param name="minLength">4</param>
+ 			<message>
+ 				用户名长度必须在${maxLength}和${minLength}之间
+ 			</message>
+ 		</field-validator>
+ 	</field>
+ 	<field name="user.passwordString">
+	 	<field-validator type="stringlength">
+ 			<param name="minLength">6</param>
+ 			<message>
+ 				密码长度必须大于${minLength}
+ 			</message>
+ 		</field-validator>
+ 	</field>
+ 	<field name="repasswordString">
+ 		<field-validator type="fieldexpression">
+ 			<param name="expression">user.passwordString==repasswordString</param>
+ 			<message>
+ 				两次输入的密码必须一致
+ 			</message>
+ 		</field-validator>
+ 	</field>
+ 	<field name="user.emailString">
+ 		<field-validator type="email">
+ 			<message>电子邮箱格式不符合要求</message>
+ 		</field-validator>
+ 	</field>
+ </validators>
